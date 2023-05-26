@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+//TODO: Step 2 - Import the rFlutter_Alert package here.
 import 'quiz_brain.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
-void main() => runApp(const Quizzler());
+void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
-  const Quizzler({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.grey.shade900,
-        body: const SafeArea(
+        body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: QuizPage(),
@@ -25,25 +25,46 @@ class Quizzler extends StatelessWidget {
 }
 
 class QuizPage extends StatefulWidget {
-  const QuizPage({super.key});
-
   @override
   _QuizPageState createState() => _QuizPageState();
 }
 
 class _QuizPageState extends State<QuizPage> {
-  
-  List<Widget> scoreKeeper = [];
-  void checkAnswer(bool userPickedAnswer){
+  List<Icon> scoreKeeper = [];
+
+  void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getCorrectAnswer();
+
     setState(() {
-          if(userPickedAnswer == correctAnswer){
-            scoreKeeper.add(Icon(Icons.check, color: Colors.green)); //check for equality
-            } else{
-            scoreKeeper.add(Icon(Icons.cancel, color: Colors.red)); //check for equality
-            }
-            quizBrain.nextQuestion();
-            });
+      //TODO: Step 4 - Use IF/ELSE to check if we've reached the end of the quiz. If true, execute Part A, B, C, D.
+      if(quizBrain.isFinished() == true){
+      //TODO: Step 4 Part A - show an alert using rFlutter_alert (remember to read the docs for the package!)
+          Alert(
+          context: context,
+          title: 'Finished!',
+          desc: 'You\'ve reached the end of the quiz.',
+        ).show();
+      } else{
+        //TODO: Step 4 Part D - empty out the scoreKeeper.
+        quizBrain.reset();
+        //TODO: Step 4 Part D - empty out the scoreKeeper.
+        scoreKeeper = [];
+        
+      }
+      //TODO: Step 5 - If we've not reached the end, ELSE do the answer checking steps below 👇
+      if (userPickedAnswer == correctAnswer) {
+        scoreKeeper.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      } else {
+        scoreKeeper.add(Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      }
+      quizBrain.nextQuestion();
+    });
   }
 
   @override
@@ -52,7 +73,7 @@ class _QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Expanded( //question
+        Expanded(
           flex: 5,
           child: Padding(
             padding: EdgeInsets.all(10.0),
@@ -68,9 +89,9 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        Expanded( //answer
+        Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: EdgeInsets.all(15.0),
             child: TextButton(
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
               child: const Text(
@@ -84,11 +105,11 @@ class _QuizPageState extends State<QuizPage> {
                 checkAnswer(true);
           },
         ),
-      ),
-    ),
+          ),
+        ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: EdgeInsets.all(15.0),
             child: TextButton(
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
               child: const Text(
@@ -105,10 +126,12 @@ class _QuizPageState extends State<QuizPage> {
             );
           },
         ),
-      ),
-    ),
-        Row(children: scoreKeeper ),
-         ], //TODO: List ekle
+          ),
+        ),
+        Row(
+          children: scoreKeeper,
+        )
+      ],
     );
   }
 }
