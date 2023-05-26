@@ -44,14 +44,13 @@ class _QuizPageState extends State<QuizPage> {
           title: 'Finished!',
           desc: 'You\'ve reached the end of the quiz.',
         ).show();
-      } else{
         //TODO: Step 4 Part D - empty out the scoreKeeper.
         quizBrain.reset();
         //TODO: Step 4 Part D - empty out the scoreKeeper.
-        scoreKeeper = [];
-        
+        scoreKeeper = [];    
       }
       //TODO: Step 5 - If we've not reached the end, ELSE do the answer checking steps below 👇
+      else{
       if (userPickedAnswer == correctAnswer) {
         scoreKeeper.add(Icon(
           Icons.check,
@@ -64,6 +63,7 @@ class _QuizPageState extends State<QuizPage> {
         ));
       }
       quizBrain.nextQuestion();
+      }
     });
   }
 

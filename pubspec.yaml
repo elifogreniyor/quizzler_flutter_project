@@ -1,12 +1,6 @@
 name: quizzler
 description: A new Flutter application.
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# Read more about versioning at semver.org.
 version: 1.0.0+1
 
 environment:
@@ -15,11 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rflutter_alert: ^2.0.7
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  
   cupertino_icons: ^1.0.2
+  rflutter_alert: ^2.0.7
+  #TODO: Step 1 - Add the rFlutter Alert package as a dependency here and use "Packages get".
 
 dev_dependencies:
   flutter_test:
@@ -27,15 +20,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 
-# For information on the generic Dart part of this file, see the
-# following page: https://www.dartlang.org/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
   assets:
     - assets/
