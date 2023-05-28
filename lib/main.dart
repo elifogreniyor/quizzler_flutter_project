@@ -54,7 +54,7 @@ class _QuizPageState extends State<QuizPage> {
       if (userPickedAnswer == correctAnswer) {
         scoreKeeper.add(Icon(
           Icons.check,
-          color: Colors.green,
+          color: Colors.blue,
         ));
       } else {
         scoreKeeper.add(Icon(
